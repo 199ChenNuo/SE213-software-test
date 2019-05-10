@@ -65,7 +65,7 @@ public int getGainRatioMax(ArrayList<Integer> subset, LinkedList<Integer> selatt
 
 
 
-![](D:\github\SE213-software-test\project2\img\pipeline.png)
+![](.\img\pipeline.png)
 
 程序路径有2条：
 
