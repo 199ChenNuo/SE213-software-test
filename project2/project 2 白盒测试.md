@@ -131,3 +131,70 @@ void TestGetGainRatioMax(){
 并且选择`Run with coverage`就可以查看测试用例的覆盖率。（这里提一下助教的要求：代码覆盖率不低于95%）
 
 ![](img\coverage.png)
+
+## 3. DecisionTree.java
+
+> `printData`
+
+编码人员用于调试输出的辅助方法，逻辑是遍历打印train data，没有分支，采用初始化后直接调用的方式测试正确性
+
+> `read_trainARFF`
+
+读取arff后缀的数据文件，并解析成为DecisionTree数据结构
+
+测试包含两个用例，
+
+- 正常的输入数据文件名
+
+  不抛出异常，同时完成数据结构的初始化
+
+- 不存在的文件
+
+  抛出FileNotExist异常
+
+> `write_DecisionTree`
+
+```
+public void write_DecisionTree(String filename) {
+    try {
+        File file = new File(filename);
+        if (!file.exists())
+            file.createNewFile();
+        FileOutputStream fs = new FileOutputStream(filename);
+        BufferedOutputStream bos = new BufferedOutputStream(fs);
+        write_Node(bos, root, "");
+        bos.flush();
+        bos.close();
+        fs.close();
+    }catch (IOException e){
+        e.printStackTrace();
+    }
+}
+```
+
+![](img\pipeline_WriteDecisionTree.png)
+
+如上图所示，遍历所有分支需要使4节点为true和false各一次，设计两个测试用例
+
+- output file文件存在的情况
+
+  应当覆盖文件内容
+
+- output file文件不存在的情况
+
+  应当创建文件后，写入文件内容
+
+> `write_Node`
+
+将节点数据按序保存到xml文件中，通过输入预先准备的arff数据并核对输出文件内容测试。
+
+> `setDec`
+
+设置成员变量的值，通过调用一次测试。程序不抛出权限异常则说明该方法正确。
+
+> `main`
+
+子方法的正确性在上述测试中已经覆盖，main函数的逻辑是按序调用上述方法实现程序逻辑。
+
+在测试中使用预先准备的arff数据调用main函数，能正常运行到程序结束并输出结果则说明测试通过。
+
