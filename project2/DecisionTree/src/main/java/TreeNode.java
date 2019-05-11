@@ -12,8 +12,8 @@ public class TreeNode {
     private String targetValue;
     //private List<String> pathName;
 
-
     public TreeNode(){
+        childTreeNode = new ArrayList<TreeNode>();
     }
 
     public String getNodeType() {
