@@ -1,0 +1,11 @@
+<root value="null" no:5 yes:9>
+  <outlook value="rainy" no:2 yes:3>
+    <windy value="TRUE" no:2>no</windy>
+    <windy value="FALSE" yes:3>yes</windy>
+  </outlook>
+  <outlook value="overcast" yes:4>yes</outlook>
+  <outlook value="sunny" no:3 yes:2>
+    <humidity value="normal" yes:2>yes</humidity>
+    <humidity value="high" no:3>no</humidity>
+  </outlook>
+</root>
