@@ -110,4 +110,11 @@ public class TestDecisionTree {
         assertTrue(f.exists());
     }
 
+    void printTree(TreeNode root){
+        for (TreeNode child: root.getChildTreeNode()){
+            System.out.println(child);
+            printTree(child);
+        }
+    }
+
 }

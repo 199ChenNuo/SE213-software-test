@@ -72,5 +72,15 @@ public class TreeNode {
         this.targetValue = targetValue;
     }
 
-
+    @Override
+    public String toString() {
+        return "TreeNode{" +
+                "nodeType='" + nodeType + '\'' +
+                ", attributeName='" + attributeName + '\'' +
+                ", attributeValue='" + attributeValue + '\'' +
+                ", childTreeNode=" + childTreeNode +
+                ", targetNum=" + targetNum +
+                ", targetValue='" + targetValue + '\'' +
+                '}';
+    }
 }
