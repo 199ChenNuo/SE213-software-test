@@ -126,8 +126,8 @@ void TestGetGainRatioMax(){
 
 通过设置Junit测试类的运行configuration：
 
-![](D:\github\SE213-software-test\project2\img\Junit-setting.png)
+![](img\Junit-setting.png)
 
 并且选择`Run with coverage`就可以查看测试用例的覆盖率。（这里提一下助教的要求：代码覆盖率不低于95%）
 
-![](D:\github\SE213-software-test\project2\img\coverage.png)
+![](img\coverage.png)
