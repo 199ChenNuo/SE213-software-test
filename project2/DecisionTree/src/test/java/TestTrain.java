@@ -10,6 +10,7 @@ public class TestTrain {
         String result = root.toString();
         for (TreeNode child: root.getChildTreeNode()){
             result+=printTree(child);
+
         }
         return result;
     }
@@ -106,6 +107,39 @@ public class TestTrain {
         return treeNode2;
     }
 
+    private InfoGain initInfoGain1(){
+        ArrayList<String[]> trainData = new ArrayList<String[]>();
+        String[] sl={"sunny","hot","high","FALSE","no"};
+        trainData.add(sl);
+        String[] sl2={"rainy","mild","high","FALSE","yes"};
+        trainData.add(sl2);
+        return new InfoGain(trainData,4);
+    }
+    private InfoGain initInfoGain2(){
+        ArrayList<String[]> trainData = new ArrayList<String[]>();
+        String[] sl={"sunny","hot","high","FALSE","no"};
+        trainData.add(sl);
+        String[] sl2={"rainy","mild","high","FALSE","yes"};
+        trainData.add(sl2);
+        String[] sl3={"sunny","hot","high","TRUE","no"};
+        trainData.add(sl3);
+        String[] sl4={"overcast","hot","high","FALSE","yes"};
+        trainData.add(sl4);
+        return new InfoGain(trainData,4);
+    }
+    private InfoGain initInfoGain3(){
+        ArrayList<String[]> trainData = new ArrayList<String[]>();
+        String[] sl={"sunny","hot","high","FALSE","no"};
+        trainData.add(sl);
+        String[] sl2={"rainy","mild","high","FALSE","yes"};
+        trainData.add(sl2);
+        String[] sl3={"sunny","cool","high","TRUE","no"};
+        trainData.add(sl3);
+        String[] sl4={"sunny","cold","high","FALSE","yes"};
+        trainData.add(sl4);
+        return new InfoGain(trainData,4);
+    }
+
     @Test
     void TestGet_leafNum(){
         DecisionTree decisionTree = new DecisionTree();
@@ -182,11 +216,49 @@ public class TestTrain {
 
     @Test
     void TestBuildDT(){
+        DecisionTree decisionTree = new DecisionTree();
+        String fatherName="root";
+        String fatherValue="null";
+        ArrayList<Integer> subset = new ArrayList<Integer>();
+        subset.add(0);
+        subset.add(1);
+        subset.add(0);
+        LinkedList<Integer> selatt = new LinkedList<Integer>();
+        decisionTree.setInfoGain(initInfoGain3());
+        TreeNode tn = decisionTree.buildDT(fatherName,fatherValue,subset,selatt);
+        System.out.println(printTree(tn));
+        assertEquals("TreeNode{nodeType='leafNode', attributeName='root', attributeValue='null', childTreeNode=[], targetNum={rainy=1, sunny=2}, targetValue='sunny'}",
+                printTree(tn)
+                );
 
     }
 
     @Test
     void TestTrain(){
+        DecisionTree decisionTree = new DecisionTree();
+        decisionTree.train("data/train.arff","play");
+        assertEquals("TreeNode{nodeType='null', attributeName='root', attributeValue='null', childTreeNode=[TreeNode{nodeType='null', attributeName='outlook', attributeValue='rainy', childTreeNode=[TreeNode{nodeType='leafNode', attributeName='windy', attributeValue='TRUE', childTreeNode=[], targetNum={no=2}, targetValue='no'}, TreeNode{nodeType='leafNode', attributeName='windy', attributeValue='FALSE', childTreeNode=[], targetNum={yes=3}, targetValue='yes'}], targetNum={no=2, yes=3}, targetValue='yes'}, TreeNode{nodeType='leafNode', attributeName='outlook', attributeValue='overcast', childTreeNode=[], targetNum={yes=4}, targetValue='yes'}, TreeNode{nodeType='null', attributeName='outlook', attributeValue='sunny', childTreeNode=[TreeNode{nodeType='leafNode', attributeName='humidity', attributeValue='normal', childTreeNode=[], targetNum={yes=2}, targetValue='yes'}, TreeNode{nodeType='leafNode', attributeName='humidity', attributeValue='high', childTreeNode=[], targetNum={no=3}, targetValue='no'}], targetNum={no=3, yes=2}, targetValue='no'}], targetNum={no=5, yes=9}, targetValue='yes'}TreeNode{nodeType='null', attributeName='outlook', attributeValue='rainy', childTreeNode=[TreeNode{nodeType='leafNode', attributeName='windy', attributeValue='TRUE', childTreeNode=[], targetNum={no=2}, targetValue='no'}, TreeNode{nodeType='leafNode', attributeName='windy', attributeValue='FALSE', childTreeNode=[], targetNum={yes=3}, targetValue='yes'}], targetNum={no=2, yes=3}, targetValue='yes'}TreeNode{nodeType='leafNode', attributeName='windy', attributeValue='TRUE', childTreeNode=[], targetNum={no=2}, targetValue='no'}TreeNode{nodeType='leafNode', attributeName='windy', attributeValue='FALSE', childTreeNode=[], targetNum={yes=3}, targetValue='yes'}TreeNode{nodeType='leafNode', attributeName='outlook', attributeValue='overcast', childTreeNode=[], targetNum={yes=4}, targetValue='yes'}TreeNode{nodeType='null', attributeName='outlook', attributeValue='sunny', childTreeNode=[TreeNode{nodeType='leafNode', attributeName='humidity', attributeValue='normal', childTreeNode=[], targetNum={yes=2}, targetValue='yes'}, TreeNode{nodeType='leafNode', attributeName='humidity', attributeValue='high', childTreeNode=[], targetNum={no=3}, targetValue='no'}], targetNum={no=3, yes=2}, targetValue='no'}TreeNode{nodeType='leafNode', attributeName='humidity', attributeValue='normal', childTreeNode=[], targetNum={yes=2}, targetValue='yes'}TreeNode{nodeType='leafNode', attributeName='humidity', attributeValue='high', childTreeNode=[], targetNum={no=3}, targetValue='no'}",
+                printTree(decisionTree.getRoot()));
+
+        DecisionTree decisionTree2 = new DecisionTree();
+        decisionTree2.train("data/train.arff","windy");
+        assertEquals("TreeNode{nodeType='null', attributeName='root', attributeValue='null', childTreeNode=[TreeNode{nodeType='leafNode', attributeName='play', attributeValue='no', childTreeNode=[], targetNum={TRUE=3, FALSE=2}, targetValue='TRUE'}, TreeNode{nodeType='null', attributeName='play', attributeValue='yes', childTreeNode=[TreeNode{nodeType='leafNode', attributeName='windy', attributeValue='TRUE', childTreeNode=[], targetNum={TRUE=3}, targetValue='TRUE'}, TreeNode{nodeType='leafNode', attributeName='windy', attributeValue='FALSE', childTreeNode=[], targetNum={FALSE=6}, targetValue='FALSE'}], targetNum={TRUE=3, FALSE=6}, targetValue='FALSE'}], targetNum={TRUE=6, FALSE=8}, targetValue='FALSE'}TreeNode{nodeType='leafNode', attributeName='play', attributeValue='no', childTreeNode=[], targetNum={TRUE=3, FALSE=2}, targetValue='TRUE'}TreeNode{nodeType='null', attributeName='play', attributeValue='yes', childTreeNode=[TreeNode{nodeType='leafNode', attributeName='windy', attributeValue='TRUE', childTreeNode=[], targetNum={TRUE=3}, targetValue='TRUE'}, TreeNode{nodeType='leafNode', attributeName='windy', attributeValue='FALSE', childTreeNode=[], targetNum={FALSE=6}, targetValue='FALSE'}], targetNum={TRUE=3, FALSE=6}, targetValue='FALSE'}TreeNode{nodeType='leafNode', attributeName='windy', attributeValue='TRUE', childTreeNode=[], targetNum={TRUE=3}, targetValue='TRUE'}TreeNode{nodeType='leafNode', attributeName='windy', attributeValue='FALSE', childTreeNode=[], targetNum={FALSE=6}, targetValue='FALSE'}",
+                printTree(decisionTree2.getRoot()));
+
+        DecisionTree decisionTree3 = new DecisionTree();
+        decisionTree3.train("data/train.arff","temperature");
+        assertEquals("TreeNode{nodeType='leafNode', attributeName='root', attributeValue='null', childTreeNode=[], targetNum={mild=6, cool=4, hot=4}, targetValue='mild'}",
+                printTree(decisionTree3.getRoot()));
+
+        DecisionTree decisionTree4 = new DecisionTree();
+        decisionTree4.train("data/train.arff","outlook");
+        assertEquals("TreeNode{nodeType='leafNode', attributeName='root', attributeValue='null', childTreeNode=[], targetNum={rainy=5, overcast=4, sunny=5}, targetValue='rainy'}",
+                printTree(decisionTree4.getRoot()));
+
+        DecisionTree decisionTree5 = new DecisionTree();
+        decisionTree5.train("data/train.arff","humidity");
+        assertEquals("TreeNode{nodeType='null', attributeName='root', attributeValue='null', childTreeNode=[TreeNode{nodeType='leafNode', attributeName='temperature', attributeValue='mild', childTreeNode=[], targetNum={normal=2, high=4}, targetValue='high'}, TreeNode{nodeType='leafNode', attributeName='temperature', attributeValue='cool', childTreeNode=[], targetNum={normal=4}, targetValue='normal'}, TreeNode{nodeType='leafNode', attributeName='temperature', attributeValue='hot', childTreeNode=[], targetNum={normal=1, high=3}, targetValue='high'}], targetNum={normal=7, high=7}, targetValue='normal'}TreeNode{nodeType='leafNode', attributeName='temperature', attributeValue='mild', childTreeNode=[], targetNum={normal=2, high=4}, targetValue='high'}TreeNode{nodeType='leafNode', attributeName='temperature', attributeValue='cool', childTreeNode=[], targetNum={normal=4}, targetValue='normal'}TreeNode{nodeType='leafNode', attributeName='temperature', attributeValue='hot', childTreeNode=[], targetNum={normal=1, high=3}, targetValue='high'}" ,
+                printTree(decisionTree5.getRoot()));
 
     }
 

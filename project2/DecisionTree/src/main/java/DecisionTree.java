@@ -26,7 +26,9 @@ public class DecisionTree {
     private InfoGain infoGain;
     private TreeNode root;
 
-
+    public void setInfoGain(InfoGain in){
+        this.infoGain = in;
+    }
     public void train(String data_path, String targetAttr){
         //模型初始化操作
         read_trainARFF(new File(data_path));
@@ -55,7 +57,7 @@ public class DecisionTree {
      * @param fatherName 节点名称
      * @param fatherValue 节点值
      * @param subset 数据行子集
-     * @param subset 数据列子集
+     * @param selatt 数据列子集
      * @return 返回根节点
      */
     public TreeNode buildDT(String fatherName, String fatherValue, ArrayList<Integer> subset,LinkedList<Integer> selatt){
@@ -98,7 +100,8 @@ public class DecisionTree {
             int[] tempNum = get_leafNum(node);
             resultNum.add(tempNum);
             return resultNum;
-        }else{
+        }
+        else{
             int sumNum = 0;
             double oldRatio = 0;
             for (TreeNode child : node.getChildTreeNode()){
@@ -114,7 +117,7 @@ public class DecisionTree {
             int temLeaf[] = get_leafNum(node);
             double newNum = temLeaf[0] + 0.5;
             if(newNum < oldNum + sd){//符合剪枝条件，剪枝并返回本身
-                node.setChildTreeNode(null);
+                node.setChildTreeNode(new ArrayList<TreeNode>());
                 node.setNodeType("leafNode");
                 resultNum.clear();
                 resultNum.add(temLeaf);
@@ -263,12 +266,14 @@ public class DecisionTree {
     }
 
 
-
     public static void main(String[] args) {
         DecisionTree dt=new DecisionTree();
         dt.train("data/train.arff", "play");
         dt.write_DecisionTree("output/Tree.xml");
     }
 
+    public TreeNode getRoot(){
+        return root;
+    }
 }
 
