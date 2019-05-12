@@ -19,6 +19,14 @@ public class TestDecisionTree {
     }
 
     @Test
+    void TestSetInfoGain(){
+        DecisionTree dt = new DecisionTree();
+        ArrayList<String[]> trainData = new ArrayList<String[]>();
+        InfoGain in = new InfoGain(trainData, 4);
+        dt.setInfoGain(in);
+    }
+
+    @Test
     void TestPrintData() {
         DecisionTree dt = new DecisionTree();
         dt.read_trainARFF(new File("data/train.arff"));
@@ -115,6 +123,18 @@ public class TestDecisionTree {
             System.out.println(child);
             printTree(child);
         }
+    }
+
+    @Test
+    void TestGetRoot(){
+        DecisionTree dt = new DecisionTree();
+        TreeNode root = dt.getRoot();
+    }
+
+    @Test
+    void TestSetDecWrong(){
+        DecisionTree dt = new DecisionTree();
+        dt.setDec(100);
     }
 
 }
