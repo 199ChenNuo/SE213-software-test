@@ -10,7 +10,6 @@ public class TestTrain {
         String result = root.toString();
         for (TreeNode child: root.getChildTreeNode()){
             result+=printTree(child);
-
         }
         return result;
     }
@@ -106,6 +105,42 @@ public class TestTrain {
 
         return treeNode2;
     }
+    private TreeNode initTreeNodedt1(){
+        TreeNode treeNode1 = new TreeNode();
+        Map<String,Integer> targetNum1 = new HashMap<>();
+        targetNum1.put("no",4);
+        treeNode1.setTargetNum(targetNum1);
+        treeNode1.setNodeType("leafNode");
+        treeNode1.setAttributeName("outlook");
+        treeNode1.setAttributeValue("rainy");
+        treeNode1.setTargetValue("no");
+
+        TreeNode treeNode2 = new TreeNode();
+        Map<String,Integer> targetNum2 = new HashMap<>();
+        targetNum2.put("yes",5);
+        treeNode2.setTargetNum(targetNum2);
+        treeNode2.setNodeType("leafNode");
+        treeNode2.setAttributeName("outlook");
+        treeNode2.setAttributeValue("sunny");
+        treeNode2.setTargetValue("yes");
+
+        TreeNode treeNode3 = new TreeNode();
+        Map<String,Integer> targetNum3 = new HashMap<>();
+        targetNum3.put("yes",5);
+        targetNum3.put("no",4);
+        treeNode3.setTargetNum(targetNum3);
+        treeNode3.setNodeType("null");
+        treeNode3.setAttributeName("root");
+        treeNode3.setTargetValue("yes");
+
+        ArrayList<TreeNode> Node3Child = new ArrayList<TreeNode>();
+        Node3Child.add(treeNode1);
+        Node3Child.add(treeNode2);
+        treeNode3.setChildTreeNode(Node3Child);
+        treeNode1.setFatherTreeNode(treeNode3);
+        treeNode2.setFatherTreeNode(treeNode3);
+        return treeNode3;
+    }
 
     private InfoGain initInfoGain1(){
         ArrayList<String[]> trainData = new ArrayList<String[]>();
@@ -128,18 +163,31 @@ public class TestTrain {
         return new InfoGain(trainData,4);
     }
     private InfoGain initInfoGain3(){
-        ArrayList<String[]> trainData = new ArrayList<String[]>();
-        String[] sl={"sunny","hot","high","FALSE","no"};
-        trainData.add(sl);
-        String[] sl2={"rainy","mild","high","FALSE","yes"};
-        trainData.add(sl2);
-        String[] sl3={"sunny","cool","high","TRUE","no"};
-        trainData.add(sl3);
-        String[] sl4={"sunny","cold","high","FALSE","yes"};
-        trainData.add(sl4);
+        ArrayList<String[]> trainData = initTrainData();
         return new InfoGain(trainData,4);
     }
-
+    private ArrayList<String[]> initTrainData(){
+        ArrayList<String[]> trainData = new ArrayList<String[]>();
+        String[] sl1={"sunny","hot","high","FALSE","yes"};
+        trainData.add(sl1);
+        String[] sl2={"sunny","hot","high","TRUE","yes"};
+        trainData.add(sl2);
+        String[] sl3={"rainy","cool","normal","FALSE","no"};
+        trainData.add(sl3);
+        String[] sl4={"rainy","cool","normal","TRUE","no"};
+        trainData.add(sl4);
+        String[] sl5={"sunny","mild","high","FALSE","yes"};
+        trainData.add(sl5);
+        String[] sl6={"sunny","cool","normal","FALSE","yes"};
+        trainData.add(sl6);
+        String[] sl7={"rainy","mild","normal","FALSE","no"};
+        trainData.add(sl7);
+        String[] sl8={"sunny","mild","normal","TRUE","yes"};
+        trainData.add(sl8);
+        String[] sl9={"rainy","mild","high","TRUE","no"};
+        trainData.add(sl9);
+        return trainData;
+    };
     @Test
     void TestGet_leafNum(){
         DecisionTree decisionTree = new DecisionTree();
@@ -184,12 +232,14 @@ public class TestTrain {
 
         //叶子结点本身
         TreeNode treeNode1 = initTreeNode1();
+        String result1 = treeNode1.toString();
         ArrayList<int[]> actualNum = decisionTree.cutBranch(treeNode1);
         ArrayList<int[]> resultNum = new ArrayList<int[]>();
         resultNum.add(decisionTree.get_leafNum(treeNode1));
         assertEquals(resultNum.size(),1);
         assertEquals(resultNum.get(0)[0],3);
         assertEquals(resultNum.get(0)[1],12);
+        assertEquals(result1,treeNode1.toString());
 
         //非叶子结点，符合剪枝条件
         TreeNode treeNode2 = initTreeNode2();
@@ -198,8 +248,8 @@ public class TestTrain {
         assertEquals(1,resultNum2.size());
         assertEquals(8,resultNum2.get(0)[0]);
         assertEquals(18,resultNum2.get(0)[1]);
-        String FinishCut2 = printRoot(treeNode2);
-        assertEquals(FinishCut2,printTree(treeNode2));
+        assertEquals("TreeNode{nodeType='leafNode', attributeName='null', attributeValue='null', childTreeNode=[], targetNum={1=8, 2=10}, targetValue='null'}"
+                ,printTree(treeNode2));
 
         //非叶子结点，不符合剪枝条件
         TreeNode treeNode3 = initTreeNode3();
@@ -212,6 +262,7 @@ public class TestTrain {
         assertEquals(8,resultNum3.get(0)[1]);
         assertEquals(1,resultNum3.get(1)[0]);
         assertEquals(10,resultNum3.get(1)[1]);
+
     }
 
     @Test
@@ -220,16 +271,37 @@ public class TestTrain {
         String fatherName="root";
         String fatherValue="null";
         ArrayList<Integer> subset = new ArrayList<Integer>();
-        subset.add(0);
-        subset.add(1);
-        subset.add(0);
+        for(int i=0;i<9;i++){
+            subset.add(i);
+        }
         LinkedList<Integer> selatt = new LinkedList<Integer>();
+        for(int i=0;i<5;i++){
+            selatt.add(i);
+        }
+        ArrayList<String>Train_AttributeName = new ArrayList<String>();
+        Train_AttributeName.add("outlook");
+        Train_AttributeName.add("temperature");
+        Train_AttributeName.add("humidity");
+        Train_AttributeName.add("windy");
+        Train_AttributeName.add("play");
+        decisionTree.setTrain_AttributeName(Train_AttributeName);
+        ArrayList<ArrayList<String>> train_attributeValue = new ArrayList<ArrayList<String>>();
+        ArrayList<String> l1=new ArrayList<>();
+
+        ArrayList<String[]>trainData = initTrainData();
+        for(String[] sl:trainData){
+            l1.clear();
+            for(String s:sl){
+                l1.add(s);
+            }
+            train_attributeValue.add(l1);
+        }
+        decisionTree.setTrain_attributeValue(train_attributeValue);
         decisionTree.setInfoGain(initInfoGain3());
+        decisionTree.setDec(4);
+
         TreeNode tn = decisionTree.buildDT(fatherName,fatherValue,subset,selatt);
-        System.out.println(printTree(tn));
-        assertEquals("TreeNode{nodeType='leafNode', attributeName='root', attributeValue='null', childTreeNode=[], targetNum={rainy=1, sunny=2}, targetValue='sunny'}",
-                printTree(tn)
-                );
+        assertEquals(printTree(initTreeNodedt1()), printTree(tn));
 
     }
 

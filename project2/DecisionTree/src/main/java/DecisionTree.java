@@ -29,6 +29,15 @@ public class DecisionTree {
     public void setInfoGain(InfoGain in){
         this.infoGain = in;
     }
+
+    public void setTrain_AttributeName(ArrayList<String> train_AttributeName) {
+        this.train_AttributeName = train_AttributeName;
+    }
+
+    public void setTrain_attributeValue(ArrayList<ArrayList<String>> train_attributeValue) {
+        this.train_attributeValue = train_attributeValue;
+    }
+
     public void train(String data_path, String targetAttr){
         //模型初始化操作
         read_trainARFF(new File(data_path));
