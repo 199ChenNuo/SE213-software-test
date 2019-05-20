@@ -167,6 +167,8 @@ public class DecisionTree {
                     while ((line = br.readLine()) != null) {
                         if(line=="")
                             continue;
+                        if(line.equals(""))
+                            continue;
                         String[] row = line.split(",");
                         trainData.add(row);
                     }

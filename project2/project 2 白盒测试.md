@@ -11,13 +11,20 @@
 该类共有8个方法：
 
 ```java
+// 构造函数
 public InfoGain(ArrayList<String[]> trainData, int decatt);
+// 计算信息熵
 public double getEntropy(Map<String, Integer> attributeNum);
 public double getEntropy(ArrayList<Integer> subset, int attributeIndex);
+// 信息熵增益率相关
 public int getGainRatioMax(ArrayList<Integer> subset, LinkedList<Integer> selatt);
+// 判断分类是否唯一
 public boolean isPure(Map<String,Integer> targetNum);
+// 获得对应数据子集的对应特征的值-频率字典
 public  Map<String,Integer> get_AttributeNum(ArrayList<Integer> subset, int attributeIndex );
+// 获得数据在某一特征维度下的子集划分
 public Map<String, ArrayList<Integer>> get_AttributeSubset(ArrayList<Integer> subset, int attributeIndex);
+// 根据类-数目，判读分类结果
 public String get_targetValue(Map<String,Integer> targetNum);
 ```
 
@@ -152,9 +159,9 @@ void TestGetGainRatioMax(){
 
   抛出FileNotExist异常
 
-> `write_DecisionTree`
+> `write_DecisionTree
 
-```
+```java
 public void write_DecisionTree(String filename) {
     try {
         File file = new File(filename);
@@ -254,4 +261,62 @@ node和剪枝之前不变，返回size为叶子节点个数的{min,sum}数组Arr
 子方法的正确性在上述测试中已经覆盖，main函数的逻辑是按序调用上述方法实现程序逻辑。
 
 在测试中使用预先准备的arff数据调用main函数，能正常运行到程序结束并输出结果则说明测试通过。
+
+
+
+
+
+```java
+// 设置InfoGain
+public void setInfoGain(InfoGain in)；
+// 训练函数
+public void train(String data_path, String targetAttr)；
+// 构建决策树
+public TreeNode buildDT(String fatherName, String fatherValue, ArrayList<Integer> subset,LinkedList<Integer> selatt)；
+// 剪枝函数
+public ArrayList<int[]> cutBranch(TreeNode node)；
+// 获得叶子结点的数目
+public int[] get_leafNum(TreeNode node)；
+// 读取arff文件，给attribute、attributevalue、data赋值
+public void read_trainARFF(File file)；
+// 打印Data
+public void printData()；
+// 将决策树存储到xml文件中
+public void write_DecisionTree(String filename)；
+// 写TreeNode节点
+private void write_Node(BufferedOutputStream bos, TreeNode node, String block)；
+// 设置决策变量
+public void setDec(int n)；
+public void setDec(String targetAttr)；
+// main()
+public static void main(String[] args)；
+// 获得根节点
+public TreeNode getRoot()；
+```
+
+
+
+```java
+public TreeNode();
+public String getNodeType() ;
+public void setNodeType(String nodeType);
+public String getAttributeName() ;
+public void setAttributeName(String attributeName);
+public String getAttributeValue() ;
+public void setAttributeValue(String attributeValue);
+public ArrayList<TreeNode> getChildTreeNode() ;
+public void setChildTreeNode(ArrayList<TreeNode> childTreeNode) ;
+public TreeNode getFatherTreeNode() ;
+public void setFatherTreeNode(TreeNode fatherTreeNode);
+public Map<String, Integer> getTargetNum();
+public void setTargetNum(Map<String, Integer> targetNum);
+public String getTargetValue();
+public void setTargetValue(String targetValue);
+@Override
+public String toString();
+```
+
+
+
+
 
