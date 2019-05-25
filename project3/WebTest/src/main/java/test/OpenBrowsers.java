@@ -6,13 +6,15 @@ public class OpenBrowsers {
 
 
     public static void main(String args[]) throws Exception{
-        System.setProperty("webdriver.chrome.driver","G:\\大三下\\软件测试\\hw3\\新建文件夹\\chromedriver.exe");
 
         ChromeDriver driver = new ChromeDriver();
 
         LoginUtil lu=new LoginUtil();
 //        lu.addCookie(driver);
         lu.getCookie(driver);
+
+        NavigateTest nt = new NavigateTest(driver);
+        nt.run();
 
         DropBoxTest dt = new DropBoxTest(driver);
         dt.run();
