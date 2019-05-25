@@ -26,6 +26,9 @@ public class OpenBrowsers {
         InputTest it=new InputTest(driver);
         it.run();
 
+        UploadFileTest uf = new UploadFileTest(driver);
+        uf.run();
+
         Thread.sleep(1000);
         driver.quit();
 
