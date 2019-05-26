@@ -7,10 +7,12 @@ public class OpenBrowsers {
 
     public static void main(String args[]) throws Exception{
 
+        System.setProperty("webdriver.chrome.driver","D:\\github\\SE213-software-test\\project3\\chromedriver-v74\\chromedriver.exe");
+
         ChromeDriver driver = new ChromeDriver();
 
         LoginUtil lu=new LoginUtil();
-//        lu.addCookie(driver);
+        lu.addCookie(driver);
         lu.getCookie(driver);
 
         NavigateTest nt = new NavigateTest(driver);

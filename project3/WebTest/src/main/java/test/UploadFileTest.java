@@ -63,8 +63,8 @@ public class UploadFileTest {
     }
 
     public void run() throws Exception{
-//        testUploadPic();
-//        Thread.sleep(1000);
+        testUploadPic();
+        Thread.sleep(1000);
 
         writeNote();
         Thread.sleep(1000);
