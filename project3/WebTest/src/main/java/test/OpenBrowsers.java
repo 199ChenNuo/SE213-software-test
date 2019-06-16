@@ -11,12 +11,12 @@ public class OpenBrowsers {
 
         ChromeDriver driver = new ChromeDriver();
 
+        NavigateTest nt = new NavigateTest(driver);
+        nt.run();
+
         LoginUtil lu=new LoginUtil();
         lu.addCookie(driver);
         lu.getCookie(driver);
-
-        NavigateTest nt = new NavigateTest(driver);
-        nt.run();
 
         DropBoxTest dt = new DropBoxTest(driver);
         dt.run();
@@ -33,6 +33,8 @@ public class OpenBrowsers {
         UploadFileTest uf = new UploadFileTest(driver);
         uf.run();
 
+
+        System.out.println("\nall test passed.");
         Thread.sleep(1000);
         driver.quit();
 

@@ -7,6 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 public class NavigateTest {
 
@@ -61,13 +62,21 @@ public class NavigateTest {
 
         /* assert Link url */
         assertSubTabLink(link_list.get(0), "https://book.douban.com/");
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         assertSubTabLink(link_list.get(1), "https://movie.douban.com/");
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         assertSubTabLink(link_list.get(2), "https://music.douban.com/");
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         assertSubTabLink(link_list.get(3), "https://www.douban.com/group/explore");
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         assertSubTabLink(link_list.get(4), "https://shanghai.douban.com/");
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         assertSubTabLink(link_list.get(5), "https://douban.fm");
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         assertSubTabLink(link_list.get(6), "https://m.douban.com/time/");
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         assertSubTabLink(link_list.get(7), "https://market.douban.com/");
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
     }
 
     private void testAlbum() {

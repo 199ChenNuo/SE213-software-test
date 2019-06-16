@@ -11,8 +11,8 @@ import java.util.concurrent.TimeUnit;
 
 public class LoginUtil {
 
-    final private static String phone="1234";
-    final private static String pwd="pwd";
+    final private static String phone="13262615836";
+    final private static String pwd="doubandemima&22";
 
     void addCookie(ChromeDriver driver) throws Exception{
         driver.get("https://accounts.douban.com/passport/login?source=movie");
@@ -85,6 +85,7 @@ public class LoginUtil {
             driver.navigate().refresh();
         } catch (Exception e) {
             // TODO Auto-generated catch block
+            System.out.println("create file failed.");
             e.printStackTrace();
         }
 

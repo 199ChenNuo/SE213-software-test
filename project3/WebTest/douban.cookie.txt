@@ -1,0 +1,24 @@
+ll;"108296";.douban.com;/;Mon May 25 22:54:22 CST 2020;false
+__utmz;30149280.1558882458.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none);.douban.com;/;Mon Nov 25 10:54:51 CST 2019;false
+dbcl2;"196798276:yd0OWxw3nMo";.douban.com;/;null;false
+push_noty_num;0;.douban.com;/;Tue Jun 25 22:54:51 CST 2019;false
+__yadk_uid;gT6UkucVnOCW4YDMKLhNbMiTZSB72WK1;www.douban.com;/;Mon May 25 22:54:33 CST 2020;false
+__utmv;30149280.19679;.douban.com;/;Tue May 25 22:54:51 CST 2021;false
+__utmt;1;.douban.com;/;Sun May 26 23:04:18 CST 2019;false
+ck;Jnt6;.douban.com;/;null;false
+douban-fav-remind;1;.douban.com;/;Tue May 02 22:54:28 CST 2119;false
+ap_v;0,6.0;.douban.com;/;Mon May 27 00:54:16 CST 2019;false
+gr_user_id;6ba2f938-5ffc-4798-8f56-785c6b2ec597;.douban.com;/;Wed May 23 22:54:18 CST 2029;false
+loc-last-index-location-id;"108296";.douban.com;/;Tue May 28 06:54:22 CST 2019;false
+_pk_ses.100001.8cb4;*;www.douban.com;/;Sun May 26 23:24:51 CST 2019;false
+gr_session_id_22c937bbd8ebd703f2d8e9445f7dfd03_a8f428ab-b33c-450a-8e98-de99951c04ff;false;.douban.com;/;Sun May 26 23:24:18 CST 2019;false
+_pk_id.100001.8cb4;923784bb4a5f384d.1558882456.1.1558882491.1558882456.;www.douban.com;/;Tue May 25 22:54:51 CST 2021;false
+__utmt_douban;1;.douban.com;/;Sun May 26 23:04:18 CST 2019;false
+gr_cs1_a8f428ab-b33c-450a-8e98-de99951c04ff;user_id%3A0;.douban.com;/;Sun May 26 23:24:18 CST 2019;false
+__utmb;30149280.10.10.1558882458;.douban.com;/;Sun May 26 23:24:51 CST 2019;false
+__utmc;30149280;.douban.com;/;null;false
+bid;k6WsqKeLQRI;.douban.com;/;Mon May 25 22:54:14 CST 2020;false
+gr_session_id_22c937bbd8ebd703f2d8e9445f7dfd03;a8f428ab-b33c-450a-8e98-de99951c04ff;.douban.com;/;Sun May 26 23:24:18 CST 2019;false
+__utma;30149280.117379699.1558882458.1558882458.1558882458.1;.douban.com;/;Tue May 25 22:54:51 CST 2021;false
+push_doumail_num;0;.douban.com;/;Tue Jun 25 22:54:51 CST 2019;false
+trc_cookie_storage;taboola%2520global%253Auser-id%3Dad6b5c8d-a703-4cff-9240-34ef7de98f16-tuct3e42e2a;www.douban.com;/;Mon May 25 22:54:33 CST 2020;false
